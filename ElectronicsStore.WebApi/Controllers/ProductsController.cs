@@ -181,7 +181,7 @@ public class ProductsController(ApplicationDbContext dbContext) : BaseController
         }
         
         var request = HttpContext.Request;
-        var baseUrl = $"{request.Scheme}://{request.Host}";
+        var baseUrl = $"http://217.198.9.32";
 
         var result = await query
             .OrderBy(x => x.Name)
