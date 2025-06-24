@@ -14,11 +14,6 @@ using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-builder.Services.AddOpenApi(e => e.AddDocumentTransformer((x, _, _) =>
-{
-    x.Servers = [];
-    return Task.CompletedTask;
-}));
 
 // NOTE: Keys stored in unencrypted form.
 builder.Services.AddDataProtection()
@@ -101,7 +96,6 @@ using (var scope = app.Services.CreateScope())
     dbContext.Database.Migrate();
 }
 
-app.MapOpenApi();
 app.MapScalarApiReference();
 
 app.UseCors(e => e
