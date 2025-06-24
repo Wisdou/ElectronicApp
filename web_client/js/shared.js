@@ -15,7 +15,7 @@ async function isAuthenticated() {
     try {
         const item = localStorage.getItem('JWT_TOKEN');
         const jwtToken = '';
-        if (!_.isNil(item)) {
+        if (item != null) {
             let userData = JSON.parse(item);
             jwtToken = userData?.access_token;
         }
@@ -51,7 +51,7 @@ async function signOut(){
     try {
         const item = localStorage.getItem('JWT_TOKEN');
         const jwtToken = '';
-        if (!_.isNil(item)) {
+        if (item != null) {
             let userData = JSON.parse(item);
             jwtToken = userData?.access_token;
         }

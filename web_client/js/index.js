@@ -30,7 +30,7 @@
         try {
             const item = localStorage.getItem('JWT_TOKEN');
             const jwtToken = '';
-            if (!_.isNil(item)) {
+            if (item != null) {
                 let userData = JSON.parse(item);
                 jwtToken = userData?.access_token;
             }
@@ -67,7 +67,7 @@
         try {
             const item = localStorage.getItem('JWT_TOKEN');
             const jwtToken = '';
-            if (!_.isNil(item)) {
+            if (item != null) {
                 let userData = JSON.parse(item);
                 jwtToken = userData?.access_token;
             }
@@ -108,7 +108,7 @@
             try {
                 const item = localStorage.getItem('JWT_TOKEN');
                 const jwtToken = '';
-                if (!_.isNil(item)) {
+                if (item != null) {
                     let userData = JSON.parse(item);
                     jwtToken = userData?.access_token;
                 }
@@ -180,7 +180,7 @@ async function loadProducts(category = null, searchText = null) {
 
         const item = localStorage.getItem('JWT_TOKEN');
         const jwtToken = '';
-        if (!_.isNil(item)) {
+        if (item != null) {
             let userData = JSON.parse(item);
             jwtToken = userData?.access_token;
         }
@@ -225,7 +225,7 @@ async function loadProducts(category = null, searchText = null) {
                     try {
                         const item = localStorage.getItem('JWT_TOKEN');
                         const jwtToken = '';
-                        if (!_.isNil(item)) {
+                        if (item != null) {
                             let userData = JSON.parse(item);
                             jwtToken = userData?.access_token;
                         }
@@ -254,7 +254,7 @@ async function loadProducts(category = null, searchText = null) {
                     try {
                         const item = localStorage.getItem('JWT_TOKEN');
                         const jwtToken = '';
-                        if (!_.isNil(item)) {
+                        if (item != null) {
                             let userData = JSON.parse(item);
                             jwtToken = userData?.access_token;
                         }
@@ -329,7 +329,7 @@ async function onUpdateProduct(form) {
 
         const item = localStorage.getItem('JWT_TOKEN');
         const jwtToken = '';
-        if (!_.isNil(item)) {
+        if (item != null) {
             let userData = JSON.parse(item);
             jwtToken = userData?.access_token;
         }
@@ -373,7 +373,7 @@ async function onAddProduct(form) {
 
         const item = localStorage.getItem('JWT_TOKEN');
         const jwtToken = '';
-        if (!_.isNil(item)) {
+        if (item != null) {
             let userData = JSON.parse(item);
             jwtToken = userData?.access_token;
         }
