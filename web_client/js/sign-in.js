@@ -28,7 +28,7 @@ async function signIn() {
             credentials: "include",
         });
 
-        const bodyVal = await response.body();
+        const bodyVal = await response.json();
         const res = JSON.parse(bodyVal);
 
         if (response.ok) {
