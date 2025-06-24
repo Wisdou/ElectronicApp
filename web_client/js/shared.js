@@ -1,4 +1,5 @@
-﻿const apiBaseUrl = "http://localhost:5555/api";
+﻿// const apiBaseUrl = "http://localhost:5555/api";
+const apiBaseUrl = "http://217.198.9.32/api/api";
 let currentUser = null;
 
 document.addEventListener("DOMContentLoaded", async () => {
