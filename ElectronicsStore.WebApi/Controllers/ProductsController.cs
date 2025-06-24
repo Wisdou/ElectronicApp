@@ -190,7 +190,7 @@ public class ProductsController(ApplicationDbContext dbContext) : BaseController
                 e.Name,
                 e.Description,
                 e.Price,
-                $"{baseUrl}/api/products/{e.Id}/image",
+                $"{baseUrl}/api/api/products/{e.Id}/image",
                 e.Category.ToString(),
                 e.AvailableQuantity))
             .ToListAsync();
