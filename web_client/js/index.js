@@ -29,7 +29,7 @@
 
         try {
             const item = localStorage.getItem('JWT_TOKEN');
-            const jwtToken = '';
+            let jwtToken = '';
             if (item != null) {
                 let userData = JSON.parse(item);
                 jwtToken = userData?.access_token;
@@ -66,7 +66,7 @@
 
         try {
             const item = localStorage.getItem('JWT_TOKEN');
-            const jwtToken = '';
+            let jwtToken = '';
             if (item != null) {
                 let userData = JSON.parse(item);
                 jwtToken = userData?.access_token;
@@ -107,7 +107,7 @@
 
             try {
                 const item = localStorage.getItem('JWT_TOKEN');
-                const jwtToken = '';
+                let jwtToken = '';
                 if (item != null) {
                     let userData = JSON.parse(item);
                     jwtToken = userData?.access_token;
@@ -179,7 +179,7 @@ async function loadProducts(category = null, searchText = null) {
         const url = `${ apiBaseUrl }/products${ paramsStr ? `?${ paramsStr }` : "" }`;
 
         const item = localStorage.getItem('JWT_TOKEN');
-        const jwtToken = '';
+        let jwtToken = '';
         if (item != null) {
             let userData = JSON.parse(item);
             jwtToken = userData?.access_token;
@@ -224,7 +224,7 @@ async function loadProducts(category = null, searchText = null) {
                 document.getElementById(`delete-btn${product.id}`).addEventListener("click", async function (e) {
                     try {
                         const item = localStorage.getItem('JWT_TOKEN');
-                        const jwtToken = '';
+                        let jwtToken = '';
                         if (item != null) {
                             let userData = JSON.parse(item);
                             jwtToken = userData?.access_token;
@@ -253,7 +253,7 @@ async function loadProducts(category = null, searchText = null) {
                 document.getElementById(`update-btn${product.id}`).addEventListener("click", async function (e) {
                     try {
                         const item = localStorage.getItem('JWT_TOKEN');
-                        const jwtToken = '';
+                        let jwtToken = '';
                         if (item != null) {
                             let userData = JSON.parse(item);
                             jwtToken = userData?.access_token;
@@ -328,7 +328,7 @@ async function onUpdateProduct(form) {
         formData.append("JsonPart", jsonPart);
 
         const item = localStorage.getItem('JWT_TOKEN');
-        const jwtToken = '';
+        let jwtToken = '';
         if (item != null) {
             let userData = JSON.parse(item);
             jwtToken = userData?.access_token;
@@ -372,7 +372,7 @@ async function onAddProduct(form) {
         formData.append("JsonPart", jsonPart);
 
         const item = localStorage.getItem('JWT_TOKEN');
-        const jwtToken = '';
+        let jwtToken = '';
         if (item != null) {
             let userData = JSON.parse(item);
             jwtToken = userData?.access_token;

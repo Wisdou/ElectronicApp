@@ -5,7 +5,7 @@
 async function loadPurchasedProducts() {
     try {
         const item = localStorage.getItem('JWT_TOKEN');
-        const jwtToken = '';
+        let jwtToken = '';
         if (item != null) {
             let userData = JSON.parse(item);
             jwtToken = userData?.access_token;
