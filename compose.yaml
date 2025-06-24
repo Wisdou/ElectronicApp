@@ -1,0 +1,30 @@
+﻿volumes:
+  db.data:
+  data-protection-keys:
+    
+services:
+  electronics-store.webapi:
+    container_name: electronics-store.webapi
+    image: electronics-store.webapi
+    build:
+      context: .
+      dockerfile: ElectronicsStore.WebApi/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ASPNETCORE_HTTP_PORTS: "5555"
+    volumes:
+      - data-protection-keys:/app/data-protection-keys
+    ports:
+      - "5555:5555"
+    
+  electronics-store.frontend:
+    container_name: electronics-store.frontend
+    image: electronics-store.frontend
+    build:
+      context: ./web_client
+      dockerfile: Dockerfile
+    restart: no
+    ports:
+      - "80:80"
+    depends_on:
+      - electronics-store.webapi

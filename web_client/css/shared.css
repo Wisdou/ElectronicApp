@@ -1,0 +1,224 @@
+﻿.flex-container {
+    display: flex;
+}
+
+h1{
+    font-size: 24px;
+}
+
+body{
+    background: white;
+}
+
+header{
+    justify-content: space-between;
+    padding-top: 20px;
+    align-items: center;
+}
+
+.logo-container{
+    background: #ffa218;
+    padding: 10px;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.main-nav{
+    gap: 15px;
+}
+
+.main-nav a{
+    color: black;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.main-nav a:hover{
+    color: #ffa218;
+    transition: 0.3s ease;
+}
+
+.content-container {
+    min-width: 800px;
+    max-width: 1250px;
+    margin: 0 auto;
+}
+
+.user-account-container{
+    position: relative;
+    display: none;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.account-info-dropdown{
+    display: none;
+    position: absolute;
+    width: 100%;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+#sign-out-button{
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    color: red;
+    font-size: 16px;
+    text-decoration: underline;
+    background: transparent;
+}
+
+.user-account-container:hover .account-info-dropdown {
+    display: block;
+}
+
+.submit-button {
+    background: #ffa218;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s ease;
+}
+
+.submit-button::after, .logo-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    border-radius: 8px;
+}
+
+.submit-button:hover::after, .logo-container:hover::after {
+    opacity: 1;
+}
+
+.root{
+    padding-top: 50px;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.dns-select {
+    appearance: none;
+    background-color: white;
+    border: 2px solid #ffa218;
+    color: #333;
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='%23ffa218' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px 16px;
+}
+
+.dns-select:hover {
+    border-color: #ffb743;
+}
+
+.dns-select:focus {
+    box-shadow: 0 0 0 3px rgba(255, 162, 24, 0.3);
+}
+
+.admin-item{
+    display: none;
+}
+
+.dns-input {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 16px;
+    border: 2px solid #ffa218;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    color: #333;
+    background-color: #fff;
+    font-weight: 500;
+    resize: none;
+}
+
+.dns-input::placeholder {
+    color: #999;
+}
+
+.dns-input:hover {
+    border-color: #ffb743;
+}
+
+.dns-input:focus {
+    border-color: #ffa218;
+    box-shadow: 0 0 0 3px rgba(255, 162, 24, 0.3);
+}
+
+.modal-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    min-width: 300px;
+    min-height: 100px;
+    max-width: 600px;
+    max-height: 600px;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.modal-content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-button {
+    font-size: 50px;
+    cursor: pointer;
+    color: red;
+    background: none;
+    border: none;
+    outline: none;
+    transition: color 0.2s ease;
+}
+
+.modal-window-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.error {
+    color: red;
+    font-weight: 500;
+    font-size: 18px;
+    display: none;
+}
