@@ -1,9 +1,16 @@
-﻿volumes:
+﻿version: "3"
+
+name: electronic-service
+
+volumes:
   db.data:
   data-protection-keys:
+
+networks:
+  dev:
     
 services:
-  electronics-store.webapi:
+  webapi:
     container_name: electronics-store.webapi
     image: electronics-store.webapi
     build:
@@ -16,10 +23,15 @@ services:
       - data-protection-keys:/app/data-protection-keys
     ports:
       - "5555:5555"
+    networks:
+      - dev
     
-  electronics-store.frontend:
+  frontend:
     container_name: electronics-store.frontend
     image: electronics-store.frontend
+    volumes:
+      - './nginx.conf:/etc/nginx/nginx.conf'
+      - data-protection-keys:/app/data-protection-keys
     build:
       context: ./web_client
       dockerfile: Dockerfile
@@ -27,4 +39,6 @@ services:
     ports:
       - "80:80"
     depends_on:
-      - electronics-store.webapi
+      - webapi
+    networks:
+      - dev

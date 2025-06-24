@@ -9,7 +9,7 @@ EXPOSE 5555
 RUN mkdir -p /app/data-protection-keys &&  \
     chown -R appuser:appgroup /app/data-protection-keys
 
-FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["ElectronicsStore.WebApi/ElectronicsStore.WebApi.csproj", "ElectronicsStore.WebApi/"]
