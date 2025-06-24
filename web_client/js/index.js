@@ -28,9 +28,19 @@
         e.preventDefault();
 
         try {
+            const item = localStorage.getItem('JWT_TOKEN');
+            const jwtToken = '';
+            if (!_.isNil(item)) {
+                let userData = JSON.parse(item);
+                jwtToken = userData?.access_token;
+            }
+
             const response = await fetch(`${apiBaseUrl}/basket/${document.getElementById("add-to-basket-productId").value}?quantity=${parseInt(document.getElementById("add-to-basket-quantity").value)}`, {
                 method: "POST",
                 credentials: "include",
+                headers: {
+                    'Authorization': `Bearer ${jwtToken}`
+                }
             });
 
             if (response.status === 200) {
@@ -55,9 +65,19 @@
         e.preventDefault();
 
         try {
+            const item = localStorage.getItem('JWT_TOKEN');
+            const jwtToken = '';
+            if (!_.isNil(item)) {
+                let userData = JSON.parse(item);
+                jwtToken = userData?.access_token;
+            }
+
             const response = await fetch(`${apiBaseUrl}/products/${document.getElementById("buy-product-productId").value}/purchase?quantity=${parseInt(document.getElementById("buy-product-quantity").value)}`, {
                 method: "POST",
                 credentials: "include",
+                headers: {
+                    'Authorization': `Bearer ${jwtToken}`
+                }
             });
 
             if (response.status === 200) {
@@ -86,10 +106,20 @@
             formData.append("sheet", this.files[0]);
 
             try {
+                const item = localStorage.getItem('JWT_TOKEN');
+                const jwtToken = '';
+                if (!_.isNil(item)) {
+                    let userData = JSON.parse(item);
+                    jwtToken = userData?.access_token;
+                }
+
                 const response = await fetch(`${apiBaseUrl}/products/from-excel`, {
                     method: "POST",
                     credentials: "include",
-                    body: formData
+                    body: formData,
+                    headers: {
+                        'Authorization': `Bearer ${jwtToken}`
+                    }
                 });
 
                 if (response.ok) {
@@ -148,9 +178,19 @@ async function loadProducts(category = null, searchText = null) {
         const paramsStr = params.toString();
         const url = `${ apiBaseUrl }/products${ paramsStr ? `?${ paramsStr }` : "" }`;
 
+        const item = localStorage.getItem('JWT_TOKEN');
+        const jwtToken = '';
+        if (!_.isNil(item)) {
+            let userData = JSON.parse(item);
+            jwtToken = userData?.access_token;
+        }
+
         const response = await fetch(url, {
             method: "GET",
             credentials: "include",
+            headers: {
+                'Authorization': `Bearer ${jwtToken}`
+            }
         });
 
         if (response.status === 200) {
@@ -183,9 +223,19 @@ async function loadProducts(category = null, searchText = null) {
 
                 document.getElementById(`delete-btn${product.id}`).addEventListener("click", async function (e) {
                     try {
+                        const item = localStorage.getItem('JWT_TOKEN');
+                        const jwtToken = '';
+                        if (!_.isNil(item)) {
+                            let userData = JSON.parse(item);
+                            jwtToken = userData?.access_token;
+                        }
+
                         const response = await fetch(`${apiBaseUrl}/products/${product.id}`, {
                             method: "DELETE",
                             credentials: "include",
+                            headers: {
+                                'Authorization': `Bearer ${jwtToken}`
+                            }
                         });
 
                         if (response.status === 200) {
@@ -202,9 +252,19 @@ async function loadProducts(category = null, searchText = null) {
 
                 document.getElementById(`update-btn${product.id}`).addEventListener("click", async function (e) {
                     try {
+                        const item = localStorage.getItem('JWT_TOKEN');
+                        const jwtToken = '';
+                        if (!_.isNil(item)) {
+                            let userData = JSON.parse(item);
+                            jwtToken = userData?.access_token;
+                        }
+
                         const response = await fetch(`${apiBaseUrl}/products/${product.id}`, {
                             method: "GET",
                             credentials: "include",
+                            headers: {
+                                'Authorization': `Bearer ${jwtToken}`
+                            }
                         });
 
                         if (response.status === 200) {
@@ -267,10 +327,20 @@ async function onUpdateProduct(form) {
         const formData = new FormData(form);
         formData.append("JsonPart", jsonPart);
 
+        const item = localStorage.getItem('JWT_TOKEN');
+        const jwtToken = '';
+        if (!_.isNil(item)) {
+            let userData = JSON.parse(item);
+            jwtToken = userData?.access_token;
+        }
+
         const response = await fetch(`${ apiBaseUrl }/products/${document.getElementById("update-productId").value}`, {
             method: "PUT",
             credentials: "include",
             body: formData,
+            headers: {
+                'Authorization': `Bearer ${jwtToken}`
+            }
         });
 
         if (response.status === 200) {
@@ -301,10 +371,20 @@ async function onAddProduct(form) {
         const formData = new FormData(form);
         formData.append("JsonPart", jsonPart);
 
+        const item = localStorage.getItem('JWT_TOKEN');
+        const jwtToken = '';
+        if (!_.isNil(item)) {
+            let userData = JSON.parse(item);
+            jwtToken = userData?.access_token;
+        }
+
         const response = await fetch(`${ apiBaseUrl }/products`, {
             method: "POST",
             credentials: "include",
             body: formData,
+            headers: {
+                'Authorization': `Bearer ${jwtToken}`
+            }
         });
 
         if (response.status === 201) {

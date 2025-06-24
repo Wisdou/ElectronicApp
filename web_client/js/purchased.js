@@ -4,9 +4,19 @@
 
 async function loadPurchasedProducts() {
     try {
+        const item = localStorage.getItem('JWT_TOKEN');
+        const jwtToken = '';
+        if (!_.isNil(item)) {
+            let userData = JSON.parse(item);
+            jwtToken = userData?.access_token;
+        }
+
         const response = await fetch(`${ apiBaseUrl }/products/purchased`, {
             method: "GET",
             credentials: "include",
+            headers: {
+                'Authorization': `Bearer ${jwtToken}`
+            }
         });
 
         if (response.status === 200) {

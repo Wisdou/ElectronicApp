@@ -29,7 +29,7 @@ async function signIn() {
         });
 
         const bodyVal = await response.json();
-        const res = JSON.parse(bodyVal);
+        localStorage.setItem('JWT_TOKEN', JSON.stringify(bodyVal));
 
         if (response.ok) {
             window.location = "index.html";

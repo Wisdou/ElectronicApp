@@ -10,10 +10,18 @@
         }
 
         try {
+            const item = localStorage.getItem('JWT_TOKEN');
+            const jwtToken = '';
+            if (!_.isNil(item)) {
+                let userData = JSON.parse(item);
+                jwtToken = userData?.access_token;
+            }
+
             const response = await fetch(`${apiBaseUrl}/basket`, {
                 method: "PUT",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    'Authorization': `Bearer ${jwtToken}`
                 },
                 credentials: "include",
                 body: JSON.stringify(selectedIds)
@@ -35,9 +43,19 @@
 
 async function loadBasketItems() {
     try {
+        const item = localStorage.getItem('JWT_TOKEN');
+        const jwtToken = '';
+        if (!_.isNil(item)) {
+            let userData = JSON.parse(item);
+            jwtToken = userData?.access_token;
+        }
+
         const response = await fetch(`${apiBaseUrl}/basket`, {
             method: "GET",
             credentials: "include",
+            headers: {
+                'Authorization': `Bearer ${jwtToken}`
+            }
         });
 
         if (response.status === 200) {
@@ -55,17 +73,17 @@ async function loadBasketItems() {
     data-price="${product.productPrice}" 
     data-quantity="${product.productQuantity}">
     <div>
-        <img src="${ product.productImageUrl }" alt="${ product.productName }">
+        <img src="${product.productImageUrl}" alt="${product.productName}">
     </div>
     <div class="product-info">
-        <h3>${ product.productName }</h3>
-        <p class="category">${ product.productCategory }</p>
+        <h3>${product.productName}</h3>
+        <p class="category">${product.productCategory}</p>
     </div>
     <div class="product-actions">
-        <p class="stock">Цена за шт: <span>${ product.productPrice.toLocaleString() }</span></p>
+        <p class="stock">Цена за шт: <span>${product.productPrice.toLocaleString()}</span></p>
         <p class="stock">Кол-во: <span>${product.productQuantity}</span></p>
         <p class="price">Сумма покупки: 
-            <span>${ (product.productPrice * product.productQuantity).toLocaleString() }</span>
+            <span>${(product.productPrice * product.productQuantity).toLocaleString()}</span>
         </p>
         <button id="delete-btn${product.productId}" class="action-button danger">Удалить</button>
     </div>
