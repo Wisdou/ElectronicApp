@@ -13,9 +13,19 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function isAuthenticated() {
     try {
+        const item = localStorage.getItem('JWT_TOKEN');
+        const jwtToken = '';
+        if (!_.isNil(item)) {
+            let userData = JSON.parse(item);
+            jwtToken = userData?.access_token;
+        }
+
         const response = await fetch(`${apiBaseUrl}/auth/me`, {
             method: "GET",
             credentials: "include",
+            headers: {
+                'Authorization': `Bearer ${jwtToken}`
+            }
         });
 
         if (response.status === 200) {
@@ -39,9 +49,19 @@ async function isAuthenticated() {
 
 async function signOut(){
     try {
+        const item = localStorage.getItem('JWT_TOKEN');
+        const jwtToken = '';
+        if (!_.isNil(item)) {
+            let userData = JSON.parse(item);
+            jwtToken = userData?.access_token;
+        }
+
         const response = await fetch(`${apiBaseUrl}/auth/sign-out`, {
             method: "POST",
             credentials: "include",
+            headers: {
+                'Authorization': `Bearer ${jwtToken}`
+            }
         });
 
         if (response.status === 200) {
