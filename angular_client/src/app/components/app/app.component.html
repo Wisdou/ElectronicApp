@@ -74,7 +74,7 @@
           <option value="PhoneCases">Чехлы для телефонов</option>
         </select>
       </div>
-      <div class="tools-container-right flex-container">
+      <div class="tools-container-right flex-container" *ngIf="isAdmin">
         <label for="excel-input" class="import-link" style="align-self: center" (click)="importProducts()">Импорт из Excel</label>
         <input type="file" id="excel-input" name="excelFile" accept=".xlsx" style="display: none">
         <a id="sales-report-lnk" (click)="createSellReport()" class="import-link admin-item">Отчет о продажах</a>
