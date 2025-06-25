@@ -1,0 +1,17 @@
+<div>
+    <div class="modal-content-val" style="min-width: 400px">
+        <div class="modal-content-header">
+            <h2>Добавить в корзину</h2>
+        </div>
+
+        <form id="add-to-basket-form" class="modal-window-form">
+            <tui-input-number [min]="min" [max]="max" [tuiTextfieldLabelOutside]="true" [(ngModel)]="quantity"
+                [ngModelOptions]="{standalone: true}">
+                Количество
+                <input tuiTextfieldLegacy required id="quantity-input">
+            </tui-input-number>
+
+            <button class="submit-button" type="submit" (click)="onSubmit()">Подтвердить</button>
+        </form>
+    </div>
+</div>

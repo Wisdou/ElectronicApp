@@ -1,0 +1,29 @@
+.modal-content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-window-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.product-img{
+    padding: 20px;
+}
+.product-img>img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.error {
+    color: red;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 500px 400px;
+}

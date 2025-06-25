@@ -1,0 +1,55 @@
+<div class="modal-form">
+    <div class="modal-content-val" style="min-width: 400px">
+        <div class="modal-content-header">
+            <h2>Карточка товара</h2>
+        </div>
+
+        <div class="container">
+            <div class="image">
+                <div class="product-img">
+                    <img [src]="imageUrl">
+                </div>
+            </div>
+
+            <form id="add-product-form" enctype="multipart/form-data" class="modal-window-form">
+                <input id="name-input" type="text" class="dns-input" placeholder="Название" [disabled]="true">
+                <textarea [disabled]="true" id="description-input" class="dns-input" placeholder="Описание"
+                    style="min-height: 100px" required></textarea>
+                <select id="modal-categories-select" class="dns-select" [disabled]="true">
+                    <option value="Phones">Мобильные телефоны</option>
+                    <option value="Laptops">Ноутбуки</option>
+                    <option value="DesktopPCs">Персональные компьютеры</option>
+                    <option value="AllInOnePCs">Моноблоки</option>
+                    <option value="Tablets">Планшеты</option>
+                    <option value="TVs">Телевизоры</option>
+                    <option value="GameConsoles">Игровые приставки</option>
+                    <option value="Headphones">Наушники</option>
+                    <option value="SmartWatches">Смарт-часы</option>
+                    <option value="Cameras">Фотоаппараты</option>
+                    <option value="HardDrives">Жесткие диски</option>
+                    <option value="SSDs">Твердотельные накопители (SSD)</option>
+                    <option value="GraphicsCards">Видеокарты</option>
+                    <option value="Processors">Процессоры</option>
+                    <option value="Motherboards">Материнские платы</option>
+                    <option value="RAM">Оперативная память</option>
+                    <option value="MicrowaveOvens">Микроволновые печи</option>
+                    <option value="VacuumCleaners">Пылесосы</option>
+                    <option value="Printers">Принтеры</option>
+                    <option value="Scanners">Сканеры</option>
+                    <option value="EReaders">Электронные книги</option>
+                    <option value="PowerBanks">Внешние аккумуляторы</option>
+                    <option value="Chargers">Зарядные устройства</option>
+                    <option value="PhoneCases">Чехлы для телефонов</option>
+                </select>
+
+                <span>
+                    Стоимость: {{price}}
+                </span>
+
+                <span>
+                    Количество: {{quantity}}
+                </span>
+            </form>
+        </div>
+    </div>
+</div>

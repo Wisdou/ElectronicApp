@@ -1,0 +1,21 @@
+.modal-content-val {
+    width: 600px;
+    height: 600px;
+    padding: 8px;
+}
+
+.modal-content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-window-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.error{
+    color: red;
+}

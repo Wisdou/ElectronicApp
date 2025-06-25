@@ -1,0 +1,112 @@
+<header class="flex-container content-container">
+  <div class="logo-container">
+    <h1>
+      Магазин электроники
+    </h1>
+  </div>
+
+  <nav class="main-nav flex-container">
+    <a routerLink="/">Каталог</a>
+    <a routerLink="/basket">Корзина</a>
+    <a routerLink="/purchased">История</a>
+  </nav>
+
+  <button *ngIf="!isLoggedIn" id="sign-in-button" class="submit-button" routerLink="/login">Войти</button>
+
+  <div *ngIf="isLoggedIn" id="user-account-container" class="user-account-container">
+    <span id="user-email">{{userEmail}}</span>
+    <div class="account-info-dropdown">
+      <button (click)="logOut()" id="sign-out-button" class="flex-container">
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+          <path
+            d="M2 2.75C2 1.784 2.784 1 3.75 1h2.5a.75.75 0 0 1 0 1.5h-2.5a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h2.5a.75.75 0 0 1 0 1.5h-2.5A1.75 1.75 0 0 1 2 13.25Zm10.44 4.5-1.97-1.97a.749.749 0 0 1 .326-1.275.749.749 0 0 1 .734.215l3.25 3.25a.75.75 0 0 1 0 1.06l-3.25 3.25a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734l1.97-1.97H6.75a.75.75 0 0 1 0-1.5Z">
+          </path>
+        </svg>
+        <span>Выйти</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content-container root flex-container">
+    <div class="search-container flex-container">
+      <label for="search-input"></label>
+      <input placeholder="Поиск по товарам..." id="search-input" type="text" [(ngModel)]="filterText" (ngModelChange)="onFilterTextChange($event)"/>
+      <button id="search-button">
+        <svg width="25" height="25" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd"
+            d="M13.6667 8.74984C13.6667 11.4652 11.4654 13.6665 8.75002 13.6665C6.03462 13.6665 3.83335 11.4652 3.83335 8.74984C3.83335 6.03444 6.03462 3.83317 8.75002 3.83317C11.4654 3.83317 13.6667 6.03444 13.6667 8.74984ZM12.7965 14.5643C11.6494 15.3641 10.2545 15.8332 8.75002 15.8332C4.838 15.8332 1.66669 12.6619 1.66669 8.74984C1.66669 4.83782 4.838 1.6665 8.75002 1.6665C12.662 1.6665 15.8334 4.83782 15.8334 8.74984C15.8334 10.2544 15.3643 11.6494 14.5643 12.7966L17.9672 16.1994L16.1994 17.9672L12.7965 14.5643Z"
+            fill="gray">
+          </path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="tools-container flex-container">
+      <div class="tools-container-left">
+        <label for="categories-select"></label>
+        <select id="categories-select" class="dns-select" [(ngModel)]="selectedCategory" (ngModelChange)="onCategoryChange($event)">
+          <option value="">Все</option>
+          <option value="Phones">Мобильные телефоны</option>
+          <option value="Laptops">Ноутбуки</option>
+          <option value="DesktopPCs">Персональные компьютеры</option>
+          <option value="AllInOnePCs">Моноблоки</option>
+          <option value="Tablets">Планшеты</option>
+          <option value="TVs">Телевизоры</option>
+          <option value="GameConsoles">Игровые приставки</option>
+          <option value="Headphones">Наушники</option>
+          <option value="SmartWatches">Смарт-часы</option>
+          <option value="Cameras">Фотоаппараты</option>
+          <option value="HardDrives">Жесткие диски</option>
+          <option value="SSDs">Твердотельные накопители (SSD)</option>
+          <option value="GraphicsCards">Видеокарты</option>
+          <option value="Processors">Процессоры</option>
+          <option value="Motherboards">Материнские платы</option>
+          <option value="RAM">Оперативная память</option>
+          <option value="MicrowaveOvens">Микроволновые печи</option>
+          <option value="VacuumCleaners">Пылесосы</option>
+          <option value="Printers">Принтеры</option>
+          <option value="Scanners">Сканеры</option>
+          <option value="EReaders">Электронные книги</option>
+          <option value="PowerBanks">Внешние аккумуляторы</option>
+          <option value="Chargers">Зарядные устройства</option>
+          <option value="PhoneCases">Чехлы для телефонов</option>
+        </select>
+      </div>
+      <div class="tools-container-right flex-container">
+        <label for="excel-input" class="import-link" style="align-self: center" (click)="importProducts()">Импорт из Excel</label>
+        <input type="file" id="excel-input" name="excelFile" accept=".xlsx" style="display: none">
+        <a id="sales-report-lnk" (click)="createSellReport()" class="import-link admin-item">Отчет о продажах</a>
+        <a id="balance-report-lnk" (click)="createRemainingReport()" class="import-link admin-item">Отчет об остатках</a>
+        <button id="add-new-product-btn" class="submit-button admin-item"
+        (click)="onAddProduct()">+ Новый товар</button>
+      </div>
+    </div>
+
+    <ul id="product-list" class="product-list" *ngIf="products$ | async as products">
+      <ng-container *ngFor="let product of products">
+        <li (click)="viewInfo(product)">
+          <div class="product-img">
+            <img [src]="product.imageUrl" [alt]="product.name">
+          </div>
+          <div class="product-info">
+            <h3>{{product.name}}</h3>
+            <p class="description">{{product.description}}</p>
+            <p class="category">{{ product.category }}</p>
+          </div>
+          <div class="product-actions">
+            <p class="price">Цена: <span>{{product.price.toLocaleString()}}</span></p>
+            <p class="stock" *ngIf="product.quantity > 0">В наличии: {{ product?.quantity }}</p>
+            <p *ngIf="product.quantity == 0"><span class="out-of-stock">Нет в наличии</span></p>
+            <button *ngIf="isLoggedIn" (click)="addToBasket(product, $event)" [id]="'add-to-basket-btn'+product.id" class="action-button" (click)="onOpenModalWindow('add-to-basket-modal')">Добавить в корзину</button>
+            <button *ngIf="isAdmin" (click)="onEditProduct(product, $event)" [id]="'update-btn'+product.id" class="action-button secondary admin-item">Редактировать</button>
+            <button *ngIf="isAdmin" (click)="onDeleteProduct(product.id, $event)" [id]="'delete-btn'+product.id" class="action-button danger admin-item">Удалить</button> 
+          </div>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+</main>
+
+<footer></footer>

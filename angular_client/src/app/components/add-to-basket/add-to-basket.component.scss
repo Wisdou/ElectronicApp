@@ -1,0 +1,25 @@
+.modal-content-val {
+    width: 400px;
+    height: 200px;
+    padding: 8px;
+}
+
+.modal-content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-window-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+tui-input-number{
+    margin: 10px 0px;
+}
+
+.error {
+    color: red;
+}

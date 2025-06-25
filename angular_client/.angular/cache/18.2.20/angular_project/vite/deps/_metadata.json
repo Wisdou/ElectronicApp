@@ -1,0 +1,142 @@
+{
+  "hash": "878c446a",
+  "configHash": "8c7615c7",
+  "lockfileHash": "55b31909",
+  "browserHash": "440c7ea5",
+  "optimized": {
+    "@angular/common": {
+      "src": "../../../../../../node_modules/@angular/common/fesm2022/common.mjs",
+      "file": "@angular_common.js",
+      "fileHash": "3b49765f",
+      "needsInterop": false
+    },
+    "@angular/common/http": {
+      "src": "../../../../../../node_modules/@angular/common/fesm2022/http.mjs",
+      "file": "@angular_common_http.js",
+      "fileHash": "c1e21d5a",
+      "needsInterop": false
+    },
+    "@angular/core": {
+      "src": "../../../../../../node_modules/@angular/core/fesm2022/core.mjs",
+      "file": "@angular_core.js",
+      "fileHash": "5de0dd75",
+      "needsInterop": false
+    },
+    "@angular/forms": {
+      "src": "../../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
+      "file": "@angular_forms.js",
+      "fileHash": "bcc4325b",
+      "needsInterop": false
+    },
+    "@angular/platform-browser": {
+      "src": "../../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
+      "file": "@angular_platform-browser.js",
+      "fileHash": "4de9d079",
+      "needsInterop": false
+    },
+    "@angular/router": {
+      "src": "../../../../../../node_modules/@angular/router/fesm2022/router.mjs",
+      "file": "@angular_router.js",
+      "fileHash": "82802c2f",
+      "needsInterop": false
+    },
+    "@taiga-ui/core": {
+      "src": "../../../../../../node_modules/@taiga-ui/core/fesm2022/taiga-ui-core.mjs",
+      "file": "@taiga-ui_core.js",
+      "fileHash": "2edfa47d",
+      "needsInterop": false
+    },
+    "@taiga-ui/event-plugins": {
+      "src": "../../../../../../node_modules/@taiga-ui/event-plugins/fesm2022/taiga-ui-event-plugins.mjs",
+      "file": "@taiga-ui_event-plugins.js",
+      "fileHash": "ca00f03c",
+      "needsInterop": false
+    },
+    "@taiga-ui/kit": {
+      "src": "../../../../../../node_modules/@taiga-ui/kit/fesm2022/taiga-ui-kit.mjs",
+      "file": "@taiga-ui_kit.js",
+      "fileHash": "065d65a8",
+      "needsInterop": false
+    },
+    "@taiga-ui/legacy": {
+      "src": "../../../../../../node_modules/@taiga-ui/legacy/fesm2022/taiga-ui-legacy.mjs",
+      "file": "@taiga-ui_legacy.js",
+      "fileHash": "b7737aef",
+      "needsInterop": false
+    },
+    "@taiga-ui/legacy/components/primitive-textfield": {
+      "src": "../../../../../../node_modules/@taiga-ui/legacy/fesm2022/taiga-ui-legacy-components-primitive-textfield.mjs",
+      "file": "@taiga-ui_legacy_components_primitive-textfield.js",
+      "fileHash": "105536fb",
+      "needsInterop": false
+    },
+    "@taiga-ui/polymorpheus": {
+      "src": "../../../../../../node_modules/@taiga-ui/polymorpheus/fesm2022/taiga-ui-polymorpheus.mjs",
+      "file": "@taiga-ui_polymorpheus.js",
+      "fileHash": "cdd8cab2",
+      "needsInterop": false
+    },
+    "lodash": {
+      "src": "../../../../../../node_modules/lodash/lodash.js",
+      "file": "lodash.js",
+      "fileHash": "c9f7efb8",
+      "needsInterop": true
+    },
+    "rxjs": {
+      "src": "../../../../../../node_modules/rxjs/dist/esm5/index.js",
+      "file": "rxjs.js",
+      "fileHash": "9a949b4a",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-RMUCPZS4": {
+      "file": "chunk-RMUCPZS4.js"
+    },
+    "chunk-XLO5OPII": {
+      "file": "chunk-XLO5OPII.js"
+    },
+    "chunk-SQMSIZ7U": {
+      "file": "chunk-SQMSIZ7U.js"
+    },
+    "chunk-4ZY343MJ": {
+      "file": "chunk-4ZY343MJ.js"
+    },
+    "chunk-AFZIW7YY": {
+      "file": "chunk-AFZIW7YY.js"
+    },
+    "chunk-3QN2FERJ": {
+      "file": "chunk-3QN2FERJ.js"
+    },
+    "chunk-F2RBK7JG": {
+      "file": "chunk-F2RBK7JG.js"
+    },
+    "chunk-H4LGA2R7": {
+      "file": "chunk-H4LGA2R7.js"
+    },
+    "chunk-O3XW73IH": {
+      "file": "chunk-O3XW73IH.js"
+    },
+    "chunk-6OUOZKCH": {
+      "file": "chunk-6OUOZKCH.js"
+    },
+    "chunk-KJWOQZAK": {
+      "file": "chunk-KJWOQZAK.js"
+    },
+    "chunk-IAZSOMIO": {
+      "file": "chunk-IAZSOMIO.js"
+    },
+    "chunk-N22DYD6F": {
+      "file": "chunk-N22DYD6F.js"
+    },
+    "chunk-ZNP3AC3U": {
+      "file": "chunk-ZNP3AC3U.js"
+    },
+    "chunk-565WYVFV": {
+      "file": "chunk-565WYVFV.js"
+    },
+    "chunk-3OV72XIM": {
+      "file": "chunk-3OV72XIM.js"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+<main>
+    <div class="main-container">
+        <h1>Вход в систему</h1>
+        <div class="sign-in-form">
+            <input class="dns-input" placeholder="Email..." [(ngModel)]="email"/>
+            <input #passwordVal class="dns-input" placeholder="Пароль..." [(ngModel)]="password" />
+            <span *ngIf="errorText" class="error">{{errorText}}</span>
+            <div class="show-password-container">
+                <input type="checkbox" (ngModelChange)="togglePasswordVisibility($event)" 
+                [(ngModel)]="isShowPasswordChecked" />
+                <label for="show-password-checkbox">Показать пароль</label>
+            </div>
+            <button type="submit" class="submit-button" (click)="signIn()">Войти</button>
+        </div>
+        <a routerLink="/register">Нет аккаунта?</a>
+    </div>
+</main>

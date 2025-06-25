@@ -1,0 +1,31 @@
+﻿<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/sign-in.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+    <title>Вход</title>
+</head>
+<body>
+<main>
+    <div class="main-container">
+        <h1>Вход в систему</h1>
+        <form class="sign-in-form" id="sign-in-form">
+            <label for="email-input"></label><input type="text" class="dns-input" id="email-input" placeholder="Email..." required/>
+            <label for="password-input"></label><input type="password" class="dns-input" id="password-input" placeholder="Пароль..." required/>
+            <pre id="sign-in-error" class="error"></pre>
+            <div class="show-password-container">
+                <input type="checkbox" id="show-password-checkbox" onclick="togglePasswordVisibility()"/>
+                <label for="show-password-checkbox">Показать пароль</label>
+            </div>
+            <button type="submit" class="submit-button">Войти</button>
+        </form>
+        <a href="sign-up.html">Нет аккаунта?</a>
+    </div>
+</main>
+
+<script src="js/shared.js"></script>
+<script src="js/sign-in.js"></script>
+</body>
+</html>
