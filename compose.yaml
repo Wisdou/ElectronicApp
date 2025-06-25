@@ -33,7 +33,7 @@ services:
       - './nginx.conf:/etc/nginx/nginx.conf'
       - data-protection-keys:/app/data-protection-keys
     build:
-      context: ./web_client
+      context: ./angular_client
       dockerfile: Dockerfile
     restart: no
     ports:

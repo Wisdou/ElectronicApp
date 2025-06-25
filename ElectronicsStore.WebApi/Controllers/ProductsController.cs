@@ -24,7 +24,7 @@ public class ProductsController(ApplicationDbContext dbContext) : BaseController
     
     private static readonly JsonSerializerOptions JsonSerializerOptions = new() { PropertyNameCaseInsensitive = true };
     
-    [HttpGet("{id}/image")]
+    [HttpGet("image/{id}")]
     public async Task<IActionResult> LoadImage(Guid id)
     {
         var cover = await dbContext
@@ -45,7 +45,7 @@ public class ProductsController(ApplicationDbContext dbContext) : BaseController
         IFormFile? NewImage,
         string JsonPart);
 
-    [HttpPut("{productId}")]
+    [HttpPost("update/{productId}")]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> UpdateProduct(Guid productId, [FromForm] UpdateProductForm form, IValidator<UpdateProductRequest> validator)
     {
@@ -95,7 +95,7 @@ public class ProductsController(ApplicationDbContext dbContext) : BaseController
         return Ok();
     }
 
-    [HttpGet("{productId}")]
+    [HttpGet("get/{productId}")]
     public async Task<IActionResult> GetProduct(Guid productId)
     {
         var product = await dbContext.Products.FirstOrDefaultAsync(p => p.Id == productId);
@@ -115,7 +115,7 @@ public class ProductsController(ApplicationDbContext dbContext) : BaseController
         IFormFile? Image,
         string? JsonPart);
 
-    [HttpPost]
+    [HttpPost("add")]
     [Authorize(Roles = "Admin")]
     public async Task<ActionResult> AddProduct([FromForm] AddProductForm form, IValidator<AddProductRequest> validator)
     {
@@ -198,9 +198,9 @@ public class ProductsController(ApplicationDbContext dbContext) : BaseController
         return Ok(result);
     }
 
-    [HttpDelete("{productId}")]
+    [HttpPost("delete")]
     [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> DeleteProduct(Guid productId)
+    public async Task<IActionResult> DeleteProduct([FromBody] Guid productId)
     {
         var affectedRowsCount = await dbContext
             .Products
@@ -230,7 +230,7 @@ public class ProductsController(ApplicationDbContext dbContext) : BaseController
         }
         
         var request = HttpContext.Request;
-        var baseUrl = $"{request.Scheme}://{request.Host}";
+        var baseUrl = $"http://217.198.9.32";
         var result = await query
             .OrderByDescending(e => e.PurchaseDateTime)
             .Select(e => new PurchasedProductResponse(
@@ -241,14 +241,14 @@ public class ProductsController(ApplicationDbContext dbContext) : BaseController
                 e.Quantity,
                 e.Product.Price,
                 e.User.Email,
-                $"{baseUrl}/api/products/{e.ProductId}/image"
+                $"{baseUrl}/api/api/products/{e.ProductId}/image"
                 ))
             .ToListAsync();
         
         return Ok(result);
     }
 
-    [HttpPost("{productId}/purchase")]
+    [HttpPost("purchase/{productId}")]
     [Authorize]
     public async Task<IActionResult> PurchaseProduct(Guid productId, [Range(1, int.MaxValue)] int quantity)
     {
