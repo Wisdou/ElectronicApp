@@ -183,17 +183,19 @@ public class ProductsController(ApplicationDbContext dbContext) : BaseController
         var request = HttpContext.Request;
         var baseUrl = $"http://217.198.9.32";
 
-        var result = await query
+        var result = (await query
             .OrderBy(x => x.Name)
+            .ToListAsync())
+            .GroupBy(x => (x.Name, x.Description, x.Price))
             .Select(e => new ProductResponse(
-                e.Id,
-                e.Name,
-                e.Description,
-                e.Price,
-                $"{baseUrl}/api/api/products/{e.Id}/image",
-                e.Category.ToString(),
-                e.AvailableQuantity))
-            .ToListAsync();
+                e.First().Id,
+                e.First().Name,
+                e.First().Description,
+                e.First().Price,
+                $"{baseUrl}/api/api/products/{e.First().Id}/image",
+                e.First().Category.ToString(),
+                e.Sum(x => x.AvailableQuantity)))
+            .ToList();
         
         return Ok(result);
     }

@@ -10,7 +10,7 @@ import _ from 'lodash';
 export class HttpCustomService {
   private authService!: AuthService;
 
-  public baseService: string = 'http://localhost:5000';
+  public baseService: string = 'http://217.198.9.32/api';
   private readonly defaultOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',

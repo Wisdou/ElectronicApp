@@ -85,7 +85,7 @@ public class BasketController(ApplicationDbContext dbContext) : BaseController
         return Ok(result);
     }
 
-    [HttpDelete("{productId}")]
+    [HttpPost("delete/{productId}")]
     [Authorize]
     public async Task<IActionResult> DeleteProductFromBasket(Guid productId)
     {
@@ -102,9 +102,9 @@ public class BasketController(ApplicationDbContext dbContext) : BaseController
         return Ok();
     }
 
-    [HttpPut]
+    [HttpPost("buy")]
     [Authorize]
-    public async Task<IActionResult> BuyProductsFromBasket(Guid[] productIds)
+    public async Task<IActionResult> BuyProductsFromBasket([FromBody] Guid[] productIds)
     {
         var currentUserId = Guid.Parse(User.Claims.First(e => e.Type == "UserId").Value);
         var items = await dbContext
