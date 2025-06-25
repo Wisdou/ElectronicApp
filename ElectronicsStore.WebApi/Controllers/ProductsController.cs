@@ -192,7 +192,7 @@ public class ProductsController(ApplicationDbContext dbContext) : BaseController
                 e.First().Name,
                 e.First().Description,
                 e.First().Price,
-                $"{baseUrl}/api/products/image/{e.First().Id}",
+                $"{baseUrl}/api/products/image/{e.First().Id}?" + DateTime.Now.Millisecond,
                 e.First().Category.ToString(),
                 e.Sum(x => x.AvailableQuantity)))
             .ToList();
