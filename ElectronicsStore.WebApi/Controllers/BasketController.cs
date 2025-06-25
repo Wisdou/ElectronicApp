@@ -25,22 +25,22 @@ public class BasketController(ApplicationDbContext dbContext) : BaseController
         {
             return BadRequest("Выбранное кол-во превышает остаток.");
         }
-        
+
         var currentUserId = Guid.Parse(User.Claims.First(e => e.Type == "UserId").Value);
         var targetBasket = await dbContext
             .Baskets
             .FirstOrDefaultAsync(e => e.UserId == currentUserId);
-        
+
         if (targetBasket is null)
         {
             targetBasket = new Basket() { UserId = currentUserId };
             dbContext.Baskets.Add(targetBasket);
         }
-        
+
         var basketItem = await dbContext
             .ProductBaskets
             .FirstOrDefaultAsync(e => e.ProductId == productId && e.BasketId == targetBasket.Id);
-        
+
         if (basketItem is null)
         {
             basketItem = new ProductBasket
@@ -55,7 +55,7 @@ public class BasketController(ApplicationDbContext dbContext) : BaseController
         {
             basketItem.Quantity += quantity;
         }
-        
+
         await dbContext.SaveChangesAsync();
         return Ok();
     }
@@ -65,7 +65,7 @@ public class BasketController(ApplicationDbContext dbContext) : BaseController
     public async Task<IActionResult> GetBasket()
     {
         var currentUserId = Guid.Parse(User.Claims.First(e => e.Type == "UserId").Value);
-        
+
         var request = HttpContext.Request;
         var baseUrl = $"http://217.198.9.32/api";
 
@@ -82,7 +82,7 @@ public class BasketController(ApplicationDbContext dbContext) : BaseController
                 e.Product.Price,
                 $"{baseUrl}/api/products/image/{e.ProductId}"))
             .ToListAsync();
-        
+
         return Ok(result);
     }
 
@@ -96,10 +96,10 @@ public class BasketController(ApplicationDbContext dbContext) : BaseController
         {
             return BadRequest();
         }
-        
+
         dbContext.ProductBaskets.Remove(item);
         await dbContext.SaveChangesAsync();
-        
+
         return Ok();
     }
 
@@ -113,7 +113,7 @@ public class BasketController(ApplicationDbContext dbContext) : BaseController
             .Where(e => e.Basket.UserId == currentUserId && productIds.Contains(e.ProductId))
             .Include(e => e.Product)
             .ToListAsync();
-        
+
         foreach (var item in items.Where(item => item.Product.AvailableQuantity < item.Quantity))
         {
             return BadRequest($"Недостаточно товара \"{item.Product.Name}\". Доступно: {item.Product.AvailableQuantity}.");
@@ -121,8 +121,12 @@ public class BasketController(ApplicationDbContext dbContext) : BaseController
 
         decimal totalSum = 0;
         int totalQuantity = 0;
-        DateTime currDate = DateTime.Now;
+        var azerbaijanTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Azerbaijan Standard Time");
 
+        string currDate = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, azerbaijanTimeZone).ToString("dd.MM.yyyy HH:mm");
+
+
+        List<string> products = new List<string>();
         foreach (var item in items)
         {
             var purchasedProduct = new PurchasedProduct
@@ -133,6 +137,7 @@ public class BasketController(ApplicationDbContext dbContext) : BaseController
                 PurchaseDateTime = DateTimeOffset.UtcNow,
             };
 
+            products.Add(item.Product.Name);
             item.Product.AvailableQuantity -= item.Quantity;
 
             totalSum += item.Quantity * item.Product.Price;
@@ -153,7 +158,7 @@ public class BasketController(ApplicationDbContext dbContext) : BaseController
                     .Row(row =>
                     {
                         row.RelativeItem()
-                        .Text("Чек на пожертвование")
+                        .Text("Чек")
                         .FontSize(18)
                         .Bold()
                         .AlignCenter();
@@ -164,29 +169,45 @@ public class BasketController(ApplicationDbContext dbContext) : BaseController
                     {
                         column.Item()
                     .Padding(10)
-                        .Text($"Дата оформления заявки: {currDate:dd.MM.yyyy HH:mm}")
-                        .FontSize(14)
-                        .AlignCenter();
+                        .Text($"Дата оформления заявки: {currDate}")
+                        .FontSize(14);
 
-                        column.Item().PaddingTop(10);
                         column.Item()
+                        .Padding(10)
                         .Text("Сумма заказа: ")
                         .FontSize(14)
                         .Bold();
                         column.Item()
+                        .Padding(10)
                     .Text($"{totalSum}\n")
                     .FontSize(14);
 
                         column.Item().PaddingTop(10);
 
                         column.Item()
+                        .Padding(10)
                         .Text("Число позиций: ")
                         .FontSize(14)
                         .Bold();
 
                         column.Item()
+                        .Padding(10)
                         .Text($"{totalQuantity}\n")
                         .FontSize(14);
+
+                        column.Item()
+                        .Padding(10)
+                        .Text("Купленные товары: ")
+                        .FontSize(14)
+                        .Bold();
+
+                        foreach (var elem in products)
+                        {
+                            column.Item()
+                                .Padding(10)
+                                .Text($"{elem}\n")
+                                .FontSize(14);
+                        }
                     });
 
                 page.Footer()

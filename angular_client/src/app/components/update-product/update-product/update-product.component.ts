@@ -69,7 +69,7 @@ export class UpdateProductComponent {
       const imagePart = (document.getElementById("image-input") as any).files[0];
 
       const formData = new FormData();
-      formData.append("Image", imagePart);
+      formData.append("NewImage", imagePart);
       formData.append("JsonPart", jsonPart);
 
       this.context.completeWith(formData);
