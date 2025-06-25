@@ -39,5 +39,5 @@ export class BoughtProductResponse {
   public productQuantity!: number;
   public productPrice!: number;
   public userEmail!: string;
-  public imageUrl!: string;
+  public productImageUrl!: string;
 }
