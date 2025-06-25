@@ -66,8 +66,8 @@ public class BasketController(ApplicationDbContext dbContext) : BaseController
         var currentUserId = Guid.Parse(User.Claims.First(e => e.Type == "UserId").Value);
         
         var request = HttpContext.Request;
-        var baseUrl = $"{request.Scheme}://{request.Host}";
-        
+        var baseUrl = $"http://217.198.9.32/api";
+
         var result = await dbContext
             .ProductBaskets
             .Where(e => e.Basket.UserId == currentUserId)
@@ -79,7 +79,7 @@ public class BasketController(ApplicationDbContext dbContext) : BaseController
                 e.Product.Name,
                 e.Quantity,
                 e.Product.Price,
-                $"{baseUrl}/api/products/{e.ProductId}/image"))
+                $"{baseUrl}/api/products/image/{e.ProductId}"))
             .ToListAsync();
         
         return Ok(result);

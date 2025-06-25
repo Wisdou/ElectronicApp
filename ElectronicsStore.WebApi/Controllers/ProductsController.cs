@@ -181,7 +181,7 @@ public class ProductsController(ApplicationDbContext dbContext) : BaseController
         }
         
         var request = HttpContext.Request;
-        var baseUrl = $"http://217.198.9.32";
+        var baseUrl = $"http://217.198.9.32/api";
 
         var result = (await query
             .OrderBy(x => x.Name)
@@ -192,7 +192,7 @@ public class ProductsController(ApplicationDbContext dbContext) : BaseController
                 e.First().Name,
                 e.First().Description,
                 e.First().Price,
-                $"{baseUrl}/api/api/products/{e.First().Id}/image",
+                $"{baseUrl}/api/products/image/{e.First().Id}",
                 e.First().Category.ToString(),
                 e.Sum(x => x.AvailableQuantity)))
             .ToList();
@@ -232,7 +232,7 @@ public class ProductsController(ApplicationDbContext dbContext) : BaseController
         }
         
         var request = HttpContext.Request;
-        var baseUrl = $"http://217.198.9.32";
+        var baseUrl = $"http://217.198.9.32/api";
         var result = await query
             .OrderByDescending(e => e.PurchaseDateTime)
             .Select(e => new PurchasedProductResponse(
@@ -243,7 +243,7 @@ public class ProductsController(ApplicationDbContext dbContext) : BaseController
                 e.Quantity,
                 e.Product.Price,
                 e.User.Email,
-                $"{baseUrl}/api/api/products/{e.ProductId}/image"
+                $"{baseUrl}/api/products/image/{e.ProductId}"
                 ))
             .ToListAsync();
         
