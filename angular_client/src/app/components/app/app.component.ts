@@ -134,9 +134,10 @@ export class AppComponent {
       if (elem.files.length > 0) {
         const formData = new FormData();
         formData.append("sheet", elem.files[0]);
-
+        elem.value = '';
         this.productService.importFromExcel(formData).subscribe(x => {
           alert('Импорт успешен');
+          
           this.products$ = this.productService.getProducts(this.selectedCategory, this.filterText);
         }, err => {
           alert("Ошибка при импорте: " + err);
