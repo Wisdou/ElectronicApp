@@ -5,6 +5,7 @@ using ElectronicsStore.WebApi.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using QuestPDF.Fluent;
 
 namespace ElectronicsStore.WebApi.Controllers;
 
@@ -117,7 +118,11 @@ public class BasketController(ApplicationDbContext dbContext) : BaseController
         {
             return BadRequest($"Недостаточно товара \"{item.Product.Name}\". Доступно: {item.Product.AvailableQuantity}.");
         }
-        
+
+        decimal totalSum = 0;
+        int totalQuantity = 0;
+        DateTime currDate = DateTime.Now;
+
         foreach (var item in items)
         {
             var purchasedProduct = new PurchasedProduct
@@ -130,11 +135,70 @@ public class BasketController(ApplicationDbContext dbContext) : BaseController
 
             item.Product.AvailableQuantity -= item.Quantity;
 
+            totalSum += item.Quantity * item.Product.Price;
+            totalQuantity += item.Quantity;
+
             dbContext.PurchasedProducts.Add(purchasedProduct);
             dbContext.ProductBaskets.Remove(item);
         }
 
+        var docs = Document.Create(container =>
+        {
+            container.Page(page =>
+            {
+                page.Margin(20);
+                page.DefaultTextStyle(x => x.FontFamily("Arial").FontSize(16));
+
+                page.Header()
+                    .Row(row =>
+                    {
+                        row.RelativeItem()
+                        .Text("Чек на пожертвование")
+                        .FontSize(18)
+                        .Bold()
+                        .AlignCenter();
+                    });
+
+                page.Content()
+                    .Column(column =>
+                    {
+                        column.Item()
+                    .Padding(10)
+                        .Text($"Дата оформления заявки: {currDate:dd.MM.yyyy HH:mm}")
+                        .FontSize(14)
+                        .AlignCenter();
+
+                        column.Item().PaddingTop(10);
+                        column.Item()
+                        .Text("Сумма заказа: ")
+                        .FontSize(14)
+                        .Bold();
+                        column.Item()
+                    .Text($"{totalSum}\n")
+                    .FontSize(14);
+
+                        column.Item().PaddingTop(10);
+
+                        column.Item()
+                        .Text("Число позиций: ")
+                        .FontSize(14)
+                        .Bold();
+
+                        column.Item()
+                        .Text($"{totalQuantity}\n")
+                        .FontSize(14);
+                    });
+
+                page.Footer()
+                    .AlignCenter()
+                    .Text("Спасибо за выбор нашего магазина!")
+                    .FontSize(14);
+            });
+        }).GeneratePdf();
+
+        var base64Data = Convert.ToBase64String(docs);
+
         await dbContext.SaveChangesAsync();
-        return Ok();
+        return Ok(new { File = base64Data });
     }
 }

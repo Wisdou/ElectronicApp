@@ -45,6 +45,13 @@ export class BasketComponent {
   buyProducts(products: BoughtProductResponse[]){
     const productsIds = products.map(x => x.productId);
     this.basketService.buyProducts(productsIds).subscribe(x => {
+      var a = document.createElement('a');
+      const mimeType = 'application/pdf';
+      a.href = `data:${mimeType};base64,` + x.file;
+      a.download = 'Чек';
+      a.click();
+      a.remove();
+
       alert('Товары куплены');
       this.boughtProducts$ = this.basketService.getBasket().pipe(
         tap((res) => {
